@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="jumbotron" style="background-color: #f5e7a1;">
+    <h1 style="font-variant: small-caps;">Evaluation</h1>
+    <div style="font-size: 20px" class="font-italic">
+	{% from "includes/_formhelpers.html" import render_field %}
+  	<form method="POST" action="">
+    <div class="form-group" >
+      {{render_field(form.name, class_="form-control")}}
+    </div>
+    <div class="form-group">
+        {{render_field(form.batchname, class_="form-control")}}
+      </div>
+    <div class="form-group">
+        {{render_field(form.dateTest, class_="form-control")}}
+      </div>
+    <div class="form-group">
+      {{render_field(form.date, class_="form-control")}}
+    </div>
+    <div class="form-group">
+      {{render_field(form.report, class_="form-control")}}
+    </div>
+    <div class="form-group" >
+      {{render_field(form.rate, class_="form-control")}}
+    </div>
+    <p><input type="submit" class="btn btn-primary" value="Submit"></p>
+  </form>
+  </div>
+  </div>
+  {% endblock %}

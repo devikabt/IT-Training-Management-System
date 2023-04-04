@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<div class="container">
+        <div class="row">
+			<div class = "col-md-6">
+                <table class="table table-dark table-hover">
+                    {%if batchinfo %}
+                    {%for row in batchinfo %}
+                    <tr>
+                        <th class=" bg-info text-dark font-weight-bold">Course Name: {{row.coursename}} </th>
+                   
+                        <th class=" bg-info text-dark font-weight-bold">Trainer Name: {{row.trainername}} </th>
+                    </tr>
+                    {%endfor%}
+                    {%endif%}
+                    <tr>
+                        <th class=" bg-warning text-dark font-weight-bold">Total Count: {{count['COUNT(*)']}} </th>
+                        <th class=" bg-warning text-dark font-weight-bold"></th>
+                    </tr>
+                </table>
+                
+                <table class="table table-dark table-hover">
+                    <thead class="thead-light text-black">
+                        <tr>
+                            <th class="text-center">{{user}} List</th>
+                        </tr>
+                    </thead>
+                    {% for each in result %}
+                    <tr>
+                        <td class="text-center">
+                            <div class="form-group">
+                                <a href = "{{url_for('profile', username = each['username'])}}"><button type ="button" class="btn btn-outline-warning" >{{each['username']}}</button></a>
+                            </div>
+                        </td>
+                    </tr>
+                 {% endfor %}	
+                 </table>
+            </div>
+        </div>		 
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<div class=" container jumbotron" style="background-color: rgb(32, 14, 49) ">
+	<h1 style="text-align: center; background-color: aliceblue; text-emphasis-color:rgb(32, 14, 49) ;"><strong>Welcome</strong></h1>
+	<table class="table table-light table-hover table-sm">
+		<tr class="table-primary" style="font-family: cursive; font-style: oblique;">
+			<td><h4><p>Title: </p></h4></td><td><h4><div id="title"></div></h4></td>
+		</tr>
+		<tr class="table-success" style="font-family: cursive; font-style: oblique;">
+			<td><h4><p>Description: </p></h4></td><td><h4><div id="description"></div></h4></td>
+		</tr>
+		<tr class="table-danger" style="font-family: cursive; font-style: oblique;">
+			<td><h4><p>Email: </p></h4></td><td><h4><div id="email"></div></h4></td>
+		</tr>
+		<tr class="table-warning" style="font-family: cursive; font-style: oblique;">
+			<td><h4><p>Address: </p></h4></td><td><h4><div id="address"></div></h4></td>
+		</tr>
+		<tr class="table-info" style="font-family: cursive; font-style: oblique;">
+			<td><h4><p>Phone Numbers: </p></h4></td><td><h4><ul id="phoneNumbers"></ul></h4></td>
+		</tr>
+	</table>
+	<!-- Here, we'll use JavaScript to fetch and parse the JSON data -->
+	<script>
+		fetch('/static/welcome.json')
+		.then(response => response.json())
+		.then(data => {
+			document.getElementById('title').textContent = data.title;
+			document.getElementById('description').textContent = data.description;
+			document.getElementById('email').textContent = data.email;
+			document.getElementById('address').textContent = data.address.street + ', ' + data.address.city + ', ' + data.address.state + ' ' + data.address.zip;
+			data.phoneNumbers.forEach(function(phoneNumber) {
+				var li = document.createElement('li');
+				li.textContent = phoneNumber.type + ': ' + phoneNumber.number;
+				document.getElementById('phoneNumbers').appendChild(li);
+			});
+		});
+	</script>
+</div>
+
+
+{% endblock %}

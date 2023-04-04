@@ -1,0 +1,22 @@
+{
+    "title": "IT Training Management System",
+    "description": "Everything that happens in the training center will be automated by the IT-Training Management System. It is intended to assist and simplify the work of all individuals who receive training at the center, teach programs to students, and operate the training center. The database contains training details provided by the training center, tests and results of students who attend tuition at the center, contact information and personal information for each individual who attends training at the center.",
+    "email": "ittraining@management.com",
+    "address": {
+      "street": "123 Main St",
+      "city": "Aungier Street",
+      "state": "Dublin",
+      "zip": "D01YK35"
+    },
+    "phoneNumbers": [
+      {
+        "type": "home",
+        "number": "089963359"
+      },
+      {
+        "type": "work",
+        "number": "89964423"
+      }
+    ]
+  }
+  

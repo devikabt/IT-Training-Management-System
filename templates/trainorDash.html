@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container" >
+  <div class="text-white">
+    <div style="text-align: center;justify-content: baseline;text-decoration: solid;font-weight: bolder;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: larger;font-style: italic; background-color: #49043b;"><h1>Welcome {{session.username}} </h1></div>
+  </div>
+</div> 
+<div class="container overflow-hidden">
+  <div class="row gy-5">
+    <div class="col-6">
+    <div class="p-3">
+      <div class=" container jumbotron" style="background-color: #49043b ">
+        <div style="text-align: center;justify-content: baseline;text-decoration: solid;font-weight: bolder;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: larger;font-style: italic; background-color: aliceblue;">
+          <h5>Your Batch Details</h5>
+        </div>
+        {% for row in batch %}
+        <table class="table table-light table-hover">
+          <th>
+          <p style="font-size: 20px"><strong style="font-variant: small-caps; ">Batch Name</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{row.batchname}}</p>
+          <br>
+          <p style="font-size: 20px"><strong style="font-variant: small-caps;">Course Name</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{row.coursename}}</p>
+          <br>
+          <p style="font-size: 20px"><strong style="font-variant: small-caps;">Batch Start Date</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{row.batchstartdate}}</p>
+          <br>
+          <p style="font-size: 20px"><strong style="font-variant: small-caps;">Batch End Date</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{row.batchenddate}}</p>
+          <br>
+          <p style="font-size: 20px"><strong style="font-variant: small-caps;">Batch Time</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{row.batchtime}}</p>
+          <br>
+          </th>
+        </table>
+        {%endfor%}
+      </div>
+    </div>
+    </div>
+    <div class="col-6">
+    <div class="p-3">
+      <div class="container jumbotron" style=" background-color: #49043b">
+          <div style="text-align: center;justify-content: baseline;text-decoration: solid;font-weight: bolder;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: larger;font-style: italic;background-color: aliceblue;"><h5>Evaluation</h5></div>
+            <table class="table table-light table-hover">
+              <th style="text-align: center;">
+                  {% for each in batch_under %}
+                  <a href = "{{url_for('batchUnder', batch = each['batchname'])}}"><button type ="button" class="btn btn-warning" >{{each['batchname']}}</button></a>
+                  {% endfor %}
+              </th>
+            </table>
+      </div>
+
+      <div class="container jumbotron" style=" background-color:#49043b">
+        <div style="text-align: center;justify-content: baseline;text-decoration: solid;font-weight: bolder;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: larger;font-style: italic;background-color: aliceblue;"><h5>Update Test</h5></div>
+          <table class="table table-light table-hover">
+            <th style="text-align: center;">
+                <a href = "{{url_for('updatePlans')}}"><button type ="button" class="btn btn-secondary btn-lg" >Update Test</button></a>
+            </th>
+          </table>
+      </div>
+
+      <div class="jumbotron" style="background-color: #49043b">
+        <div style="text-align: center;justify-content: baseline;text-decoration: solid;font-weight: bolder;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: larger;font-style: italic;background-color: aliceblue;"><h5>Students train under you</h5></div>
+        <br>
+        <table class="table table-light table-hover">
+          <th style="text-align: center;">
+            {% for each in members %}
+            <a href="{{url_for('memberDash', username = each['username'])}}"><button type="button" class="btn btn-dark">{{each['username']}}</button></a>
+            {% endfor %}
+          </th>
+        </table>
+        </div>
+    </div>
+    </div>
+    
+    
+  </div>
+  </div>
+{% endblock %}
+
+
+

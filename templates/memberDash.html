@@ -1,0 +1,126 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<div class="container" >
+		<div class="text-white">
+			<div style="text-align: center;justify-content: baseline;text-decoration: solid;font-weight: bolder;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: larger;font-style: italic; background-color: #49043b;"><h1>Welcome {{user}} </h1></div>
+		</div>
+	</div> 
+	<div class="container overflow-hidden">
+		<div class="row gy-5">
+		  <div class="col-6">
+			<div class="p-3">
+				<div class=" container jumbotron" style="background-color: #49043b ">
+					<div style="text-align: center;justify-content: baseline;text-decoration: solid;font-weight: bolder;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: larger;font-style: italic; background-color: aliceblue;">
+						<h5>Your Course Details</h5>
+					</div>
+					<table class="table table-light table-hover">
+						<th>
+						<p style="font-size: 25px"><strong style="font-variant: small-caps; ">CourseName</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{coursename}}</p>
+						<br>
+						{% for trainorBatch in trainorBatch %}
+						<p style="font-size: 25px"><strong style="font-variant: small-caps; ">BatchName</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{trainorBatch['batch']}}</p>
+						<br>
+						<p style="font-size: 25px"><strong style="font-variant: small-caps;">TrainerName</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{trainorBatch['trainor']}}</p>
+						<br>
+						{%endfor%}
+						{%for batchtime in batchtime %}
+						<p style="font-size: 25px"><strong style="font-variant: small-caps;">BatchTime</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{batchtime['batchtime']}}</p>
+						<br>
+						{%endfor%}
+						{% for course in course %}
+						<p style="font-size: 25px"><strong style="font-variant: small-caps;">CourseDuration</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{course['course_duration']}}</p>
+						<br>
+						<p style="font-size: 25px"><strong style="font-variant: small-caps;">CoursePrice</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{course['course_price']}}</p>
+						<br>
+						{%endfor%}
+						</th>
+					</table>
+				</div>
+			</div>
+		  </div>
+		  <div class="col-6">
+			<div class="p-3">
+				<div class="container jumbotron" style=" background-color: #49043b">
+					<div style="text-align: center;justify-content: baseline;text-decoration: solid;font-weight: bolder;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: larger;font-style: italic;background-color: aliceblue;"><h5>Test Details</h5></div>
+						<table class="table table-light table-hover">
+							<th>
+								{% if not testdetails %}
+									<p>Test Date is not finalised</p>
+								{% else %}
+								{% for testdetails in testdetails %}
+								<p style="font-size: 25px"><strong style="font-variant: small-caps; ">CourseName</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{testdetails['coursename']}}</p>
+								<br>
+								<p style="font-size: 25px"><strong style="font-variant: small-caps; ">BatchName</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{testdetails['batchname']}}</p>
+								<br>
+								<p style="font-size: 25px"><strong style="font-variant: small-caps;">TestName</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{testdetails['testname']}}</p>
+								<br>
+								<p style="font-size: 25px"><strong style="font-variant: small-caps;">TestDate</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{testdetails['testdate']}}</p>
+								<br>
+								<p style="font-size: 25px"><strong style="font-variant: small-caps;">TestStartTime</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{testdetails['teststarttime']}}</p>
+								<br>
+								<p style="font-size: 25px"><strong style="font-variant: small-caps;">TestEndTime</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{testdetails['testendtime']}}</p>
+								<br>
+								{%endfor%}
+								{% endif %}
+							</th>
+						</table>
+					</div>
+			</div>
+		  </div>
+		  <div class="col-6">
+			<div class="p-3">
+				<div class="container jumbotron" style=" background-color:#49043b">
+					<div style="text-align: center;justify-content: baseline;text-decoration: solid;font-weight: bolder;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: larger;font-style: italic;background-color: aliceblue;">
+						<h5>Test Report</h5>
+					</div>
+					<table class="table table-light table-hover">
+						{% if not progress %}
+						<th><p>No Test Report Found</p></th>	
+						{% else %}
+						<tr>
+							<th class="text-center " height="50"><strong>DATE</strong></th>
+							<th class="text-center " height="50"><strong>REPORT</strong></th> 
+							<th class="text-center " height="50"><strong>RESULT</strong></th> 
+						</tr>
+						{% for each in progress %}
+						<tr>
+							<td class="text-center" height="50">{{each['date']}}</td>
+							<td class="text-center" height="50">{{each['daily_result']}}</td>
+							{% if each['rate']==1 %}
+							<td class="text-center" style="color:green;" height="50">good</td>
+							{% endif %}
+							{% if each['rate']==2 %}
+							<td class="text-center" style="color: yellow;" height="50">average</td>
+							{% endif %}
+							{% if each['rate']==3 %}
+							<td class="text-center" style="color: red;" height="50">poor</td>
+							{% endif %}
+						</tr>
+						{% endfor %}	
+						{% endif %}
+					</table>
+				</div>
+			</div>
+		  </div>
+		  <div class="col-6">
+			<div class="p-3">
+				<div class="container jumbotron" style="background-color: #49043b;">
+					<div style="text-align: center;justify-content: baseline;text-decoration: solid;font-weight: bolder;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: larger;font-style: italic;background-color: aliceblue;"><h5>Performance Bar</h5></div>
+					<div class="progress", style="height:30px">
+						<div class="progress-bar bg-success  progress-bar-striped progress-bar-animated text-dark font-weight-bold font-italic" style="width:{{good}}%; height:30px" >
+							Good {{good}}%
+						</div>
+						<div class="progress-bar bg-warning  progress-bar-striped progress-bar-animated text-dark font-weight-bold font-italic" style="width:{{average}}%; height:30px">
+							Average {{average}}%
+						</div>
+						<div class="progress-bar bg-danger  progress-bar-striped progress-bar-animated text-dark font-weight-bold font-italic " style="width:{{poor}}%; height:30px">
+							Poor {{poor}}%
+						</div>
+					</div> 
+				</div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+{% endblock %}
