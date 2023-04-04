@@ -820,7 +820,7 @@ def trainorDash():
     cur.close()
     cur = mysql.connection.cursor()
 
-    return render_template('trainorDash.html', batch = batch, batch_under = batch_under, members=members_under)
+    return render_template('trainorDash.html', batch = batch, batch_under = batch_under, members = members_under)
 
 choices7 = []
 choices8 = []
@@ -865,7 +865,7 @@ def updatePlans():
         testendtime = form.testendtime.data
         cur = mysql.connection.cursor()
         
-        if datetime.now().date()!=testdate :
+        if datetime.now().date()>testdate :
                 flash('Enter todays Date ', 'warning')
                 choices.clear()
                 return redirect(url_for('updatePlans'))
@@ -874,10 +874,10 @@ def updatePlans():
         result = cur.fetchall()
         idval = result[0]['id']
         cur.execute("SELECT batchstartdate FROM batch WHERE id = %s", [idval])
-        testdate_tuple = cur.fetchone()
+        startdate_tuple = cur.fetchone()
 
-        startdate = testdate_tuple['batchstartdate'] # extract the date object from the tuple
-        print(testdate)
+        startdate = startdate_tuple['batchstartdate'] # extract the date object from the tuple
+        print(startdate)
         evaluatingdate = datetime.strptime(testdate.strftime('%Y-%m-%d'), '%Y-%m-%d').date()
         print(evaluatingdate)
         if startdate > evaluatingdate:
@@ -930,9 +930,9 @@ def memberDash(username):
         return render_template('usernotfound.html')
 
     idval = result[0]['id']
-    cur.execute("SELECT batchtime FROM batch WHERE id = %s", [idval])
-    batchtime = cur.fetchall()
-    print(batchtime)
+    cur.execute("SELECT batchtime, batchstartdate, batchenddate FROM batch WHERE id = %s", [idval])
+    batchdetails = cur.fetchall()
+    print(batchdetails)
     cur.execute("SELECT * FROM test WHERE batchID = %s ", [idval])
     testdetails = cur.fetchall()
     print(testdetails)
@@ -953,9 +953,9 @@ def memberDash(username):
             average = round((average/total) * 100, 2)
             poor = round((poor/total) * 100, 2)
         cur.close()
-        return render_template('memberDash.html',user = username, course = course,  coursename=coursename, progress = progress, good = good, poor = poor, average = average, trainorBatch = trainorBatch, testdetails = testdetails, batchtime= batchtime)    
+        return render_template('memberDash.html',user = username, course = course,  coursename=coursename, progress = progress, good = good, poor = poor, average = average, trainorBatch = trainorBatch, testdetails = testdetails, batchdetails= batchdetails)    
     cur.close()
-    return render_template('memberDash.html',user = username, course = course,  coursename=coursename, trainorBatch = trainorBatch, testdetails = testdetails, batchtime= batchtime)
+    return render_template('memberDash.html',user = username, course = course,  coursename=coursename, trainorBatch = trainorBatch, testdetails = testdetails, batchdetails= batchdetails)
 
 
 

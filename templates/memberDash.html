@@ -24,8 +24,12 @@
 						<p style="font-size: 25px"><strong style="font-variant: small-caps;">TrainerName</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{trainorBatch['trainor']}}</p>
 						<br>
 						{%endfor%}
-						{%for batchtime in batchtime %}
-						<p style="font-size: 25px"><strong style="font-variant: small-caps;">BatchTime</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{batchtime['batchtime']}}</p>
+						{%for batchdetails in batchdetails %}
+						<p style="font-size: 25px"><strong style="font-variant: small-caps;">BatchTime</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{batchdetails['batchtime']}}</p>
+						<br>
+						<p style="font-size: 25px"><strong style="font-variant: small-caps;">BatchStartDate</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{batchdetails['batchstartdate']}}</p>
+						<br>
+						<p style="font-size: 25px"><strong style="font-variant: small-caps;">BatchEndDate</strong>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{batchdetails['batchenddate']}}</p>
 						<br>
 						{%endfor%}
 						{% for course in course %}
